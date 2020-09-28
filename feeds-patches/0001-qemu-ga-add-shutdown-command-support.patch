@@ -1,13 +1,13 @@
-From dc24db979d3b6287a1d776474ee2d3e26cbb1ecc Mon Sep 17 00:00:00 2001
+From 481101dee43e98460b33c66a0493ad63e42c1cdf Mon Sep 17 00:00:00 2001
 From: Gzxhwq <gzxhwq@gmail.com>
-Date: Thu, 17 Sep 2020 02:30:23 +0000
+Date: Sun, 27 Sep 2020 13:50:36 +0000
 Subject: [PATCH] qemu-ga: add shutdown command support
 
 ---
  utils/qemu/Makefile       | 4 +++-
- utils/qemu/files/shutdown | 2 ++
- 2 files changed, 5 insertions(+), 1 deletion(-)
- create mode 100755 utils/qemu/files/shutdown
+ utils/qemu/files/shutdown | 9 +++++++++
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+ create mode 100644 utils/qemu/files/shutdown
 
 diff --git a/utils/qemu/Makefile b/utils/qemu/Makefile
 index edefa58..edf4908 100644
@@ -32,13 +32,20 @@ index edefa58..edf4908 100644
  
  PKG_CONFIG_DEPENDS += CONFIG_PACKAGE_qemu-ga
 diff --git a/utils/qemu/files/shutdown b/utils/qemu/files/shutdown
-new file mode 100755
-index 0000000..ae901ab
+new file mode 100644
+index 0000000..fbfeef5
 --- /dev/null
 +++ b/utils/qemu/files/shutdown
-@@ -0,0 +1,2 @@
+@@ -0,0 +1,9 @@
 +#!/bin/sh
-+busybox poweroff
++#compatibility script for openvmtools
++
++if [ "$1" == "-r" ]; then
++  /sbin/reboot
++else
++  /sbin/poweroff
++fi
++
 -- 
 2.20.1
 
